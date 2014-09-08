@@ -1,0 +1,23 @@
+<h1>Add a Subscription to <%=full_name(@patient)%></h1>
+
+<%= form_for @prescription, url: "/patients/:patient_id/prescriptions", method: :post do |f| %>
+
+<%= f.label :Medication %>
+<%= f.collection_select :medication_id, Medication.all, :id, :name %>
+
+<%= f.label :Dosage %>
+<%= f.text_field :dosage %>
+
+<%= f.label :Schedule %>
+<%= f.text_field :schedule %>
+
+<%= f.label :Starts_on %>
+<%= f.date_select :starts_on %>
+
+<%= f.label :Ends_on %>
+<%= f.date_select :ends_on %>
+
+<%= f.submit "Create Prescription" %>
+
+<% end %>
+</form>
