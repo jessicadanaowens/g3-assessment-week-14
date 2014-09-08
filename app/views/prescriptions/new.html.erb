@@ -1,6 +1,7 @@
 <h1>Add a Subscription to <%=full_name(@patient)%></h1>
 
-<%= form_for @prescription, url: "/patients/:patient_id/prescriptions", method: :post do |f| %>
+<%= form_for @prescription, url: patient_prescriptions_path, method: :post do |f| %>
+
 
 <%= f.label :Medication %>
 <%= f.collection_select :medication_id, Medication.all, :id, :name %>
