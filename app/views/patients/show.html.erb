@@ -16,9 +16,9 @@
   <tbody>
   <%= @prescriptions.each do |prescription| %>
     <tr>
+      <td><%= prescription.medication.name %></td>
       <td><%= prescription.dosage%> every <%=prescription.schedule%></td>
-      <td></td>
-      <td></td>
+      <td><%= prescription.starts_on%> - <%= prescription.ends_on %></td>
     </tr>
     <% end %>
 

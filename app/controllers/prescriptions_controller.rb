@@ -5,8 +5,7 @@ class PrescriptionsController < ApplicationController
   end
 
   def create
-    puts "*" * 80
-    puts params
+    @patient = Patient.find(params[:patient_id])
 
     def med_id
       params[:prescription][:medication_id]
@@ -24,7 +23,7 @@ class PrescriptionsController < ApplicationController
       params[:prescription]["ends_on(3i)"].to_i,
     )
 
-    prescription = Prescription.new(
+    @prescription = Prescription.new(
       :medication_id => med_id,
       :patient_id => params[:patient_id],
       :dosage => params[:prescription][:dosage],
@@ -34,13 +33,11 @@ class PrescriptionsController < ApplicationController
       :user_id => session[:user_id]
     )
 
-    if prescription.save
+    if @prescription.save
       flash[:notice] = "Prescription successfully created"
-
-      redirect_to "/medications/" + med_id
+      redirect_to patient_path(params[:patient_id])
     else
-      redirect_to patient_prescription_path
-
+      render :new
     end
   end
 
